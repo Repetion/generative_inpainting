@@ -70,4 +70,4 @@ if __name__ == "__main__":
     fo.close()
 
     # print process
-    print("Written file is: ", args.train_filename, ", is_shuffle: ", args.is_shuffled)
+    print("Written file is: ", args.train_filename, ", is_shuffle: ", args.is_pshuffled)
