@@ -27,7 +27,7 @@ if __name__ == "__main__":
     model = InpaintCAModel()
     image = cv2.imread(args.image)
     mask = cv2.imread(args.mask)
-    # mask = cv2.resize(mask, (0,0), fx=0.5, fy=0.5)
+    mask = cv2.resize(mask, dsize = (image.shape[1], image.shape[0]), interpolation = cv2.INTER_LINEAR)
 
     assert image.shape == mask.shape
 
