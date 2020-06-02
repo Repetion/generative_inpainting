@@ -2,9 +2,9 @@ import argparse
 import os
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--dataset_name', type = str, help = 'The name of dataset')
-parser.add_argument('--image_path', type = str, help = 'The train path')
-parser.add_argument('--flist_path', default = '/home/jisukim/generative_inpainting/train_flist' ,type = str, )
+parser.add_argument('--dataset_name', type=str, help='The name of dataset')
+parser.add_argument('--image_path', type=str, help='The train path')
+parser.add_argument('--flist_path', default='/home/jisukim/generative_inpainting/train_flist' ,type=str, )
 
 if __name__ == "__main__":
     args = parser.parse_args()

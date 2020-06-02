@@ -2,8 +2,8 @@ import argparse
 import os
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--dataset_name', type = str, help = 'The name of dataset')
-parser.add_argument('--log_dir', type = str, help = 'The path of model log')
+parser.add_argument('--dataset_name', type=str, help='The name of dataset')
+parser.add_argument('--log_dir', type=str, help='The path of model log')
 
 if __name__ == "__main__":
     args = parser.parse_args()
