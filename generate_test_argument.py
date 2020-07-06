@@ -30,10 +30,15 @@ if __name__ == "__main__":
     f.close()
 
     for image_name, image_path, match_mask in zip(image_names, image_paths, match_masks):
-        test_argument = 'python test.py --image ' + args.test_path + '/masked_' + image_name + ' --mask ' + match_mask + ' --output /home/jisukim/generative_inpainting/test_output/' + args.dataset_name + '/' + image_name + ' ' + '--checkpoint_dir ' + args.log_dir
+        test_argument = 'python test.py --image ' + args.test_path + '/masked_' + image_name + ' --mask ' + match_mask + ' --output /home/jisukim/generative_inpainting/test_output/' + args.dataset_name + '/' + image_name + ' ' + '--checkpoint_dir ' + args.log_dir + ';'
         test_arguments.append(test_argument)
 
     test_arguments_path = './flist/' + args.dataset_name + '/test_arguments_' + args.dataset_name + '.flist'
     f = open(test_arguments_path, 'w')
+    f.write('\n'.join(test_arguments))
+    f.close()
+
+    test_arguments_sh_path = './test_arguments_' + args.dataset_name + '.sh'
+    f = open(test_arguments_sh_path, 'w')
     f.write('\n'.join(test_arguments))
     f.close()
