@@ -9,31 +9,31 @@ parser.add_argument('--log_dir', type=str, help='The path of model log')
 if __name__ == "__main__":
     args = parser.parse_args()
 
-    image_items = []
-    matching_items = []
-    output_items = []
-    result = []
+    image_names = []
+    image_paths = []
+    match_masks = []
+    test_arguments = []
 
-    for dirname, dirnames, filenames in os.walk(args.test_path):
-        for filename in filenames:
-            image_items.append(os.path.join(dirname, filename))
-            output_items.append(filename)
-
-    matching_path = '/home/jisukim/generative_inpainting/flist/' + 'mask_matching_' + args.dataset_name + '.flist'
-
-    f = open(matching_path, 'r')
-    matching_items = f.read().splitlines()
+    image_names_path = '/home/jisukim/generative_inpainting/flist/' + args.dataset_name + '/image_names_' + args.dataset_name + '.flist'
+    f = open(image_names_path, 'r')
+    image_names = f.read().splitlines()
+    f.close()
+    
+    image_paths_path = '/home/jisukim/generative_inpainting/flist/' + args.dataset_name + '/image_paths_' + args.dataset_name + '.flist'
+    f = open(image_paths_path, 'r')
+    image_paths = f.read().splitlines()
+    f.close()
+    
+    match_masks_path = '/home/jisukim/generative_inpainting/flist/' + args.dataset_name + '/match_masks_' + args.dataset_name + '.flist'
+    f = open(match_masks_path, 'r')
+    match_masks = f.read().splitlines()
     f.close()
 
-    index = 0
+    for image_name, image_path, match_mask in zip(image_names, image_paths, match_masks):
+        test_argument = 'python test.py --image ' + args.test_path + '/masked_' + image_name + ' --mask ' + match_mask + ' --output /home/jisukim/generative_inpainting/test_output/' + args.dataset_name + '/' + image_name + ' ' + '--checkpoint_dir ' + args.log_dir
+        test_arguments.append(test_argument)
 
-    for image_item in image_items:
-        path = 'python test.py --image ' + image_items[index] + ' --mask ' + matching_items[index] + ' --output ./output_' + output_items[index] + ' ' + '--checkpoint ' + args.log_dir
-        result.append(path)
-
-        index += 1
-    
-    output = './flist/test_argument_list/test_list_' + args.dataset_name + '.flist'
-    f = open(output, 'w')
-    f.write('\n'.join(result))
+    test_arguments_path = './flist/' + args.dataset_name + '/test_arguments_' + args.dataset_name + '.flist'
+    f = open(test_arguments_path, 'w')
+    f.write('\n'.join(test_arguments))
     f.close()

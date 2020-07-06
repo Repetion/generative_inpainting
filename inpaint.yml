@@ -8,11 +8,11 @@ gpu_type: 'nvidia-dgx-v100'
 
 # parameters
 name: places2_gated_conv_v100  # any name
-model_restore: 'model_logs/full_model_places2'  # logs/places2_gated_conv
+model_restore: 'model_logs/release_places2_256_upgrade'  # logs/places2_gated_conv
 dataset: 'places2'  # 'tmnist', 'dtd', 'places2', 'celeba', 'imagenet', 'cityscapes'
-random_crop: False  # Set to false when dataset is 'celebahq', meaning only resize the images to img_shapes, instead of crop img_shapes from a larger raw image. This is useful when you train on images with different resolutions like places2. In these cases, please set random_crop to true.
+random_crop: True  # Set to false when dataset is 'celebahq', meaning only resize the images to img_shapes, instead of crop img_shapes from a larger raw image. This is useful when you train on images with different resolutions like places2. In these cases, please set random_crop to true.
 val: False  # true if you want to view validation results in tensorboard
-log_dir: model_logs/full_model_places2
+log_dir: model_logs/release_places2_256_upgrade
 
 gan: 'sngan'
 gan_loss_alpha: 1
@@ -41,8 +41,8 @@ data_flist:
   ]
   # http://places2.csail.mit.edu/, please download the high-resolution dataset and use random_crop: True
   places2: [
-    'flist/train_places2.flist',
-    'flist/validation_places2.flist'
+    'flist/places2/train_places2.flist',
+    'flist/places2/validation_places2.flist'
   ]
   # http://www.image-net.org/, please use random_crop: True
   imagenet: [
